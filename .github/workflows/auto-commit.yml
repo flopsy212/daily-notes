@@ -1,0 +1,38 @@
+name: Auto Commit Notes (JST-based)
+
+on:
+  schedule:
+    # 毎日 00:05 JST に実行（JST=UTC+9 → 15:05 UTC）
+    - cron: '5 15 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Make script executable
+        run: chmod +x scripts/auto_note.sh
+
+      - name: Run auto commits (JST rules)
+        env:
+          TZ: Asia/Tokyo
+          TARGET_FILE: notes/english-study.md
+        run: |
+          ./scripts/auto_note.sh
+          
+      - name: Push
+        run: |
+          git push origin HEAD
