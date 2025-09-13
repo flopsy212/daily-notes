@@ -399,3 +399,4 @@
 - [2025-09-14 00:23:05 JST] auto note 17/25: studied 5 min.
 - [2025-09-14 00:23:07 JST] auto note 18/25: studied 5 min.
 - [2025-09-14 00:23:09 JST] auto note 19/25: studied 5 min.
+- [2025-09-14 00:23:11 JST] auto note 20/25: studied 5 min.
