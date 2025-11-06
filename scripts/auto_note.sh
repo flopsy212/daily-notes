@@ -24,8 +24,8 @@ if [[ "$DOW" -eq 6 || "$DOW" -eq 7 ]]; then
     commit_count=$(( 15 + RANDOM % 11 ))    # 15..25
   fi
 else
-  # 平日：1〜15回ランダム
-  commit_count=$(( 1 + RANDOM % 15 ))       # 1..15
+  # 平日：0〜10回ランダム
+  commit_count=$(( 0 + RANDOM % 10 ))       # 0..10
 fi
 
 echo "JST: $NOW_DATE ($NOW_TIME) / DOW=$DOW → commit_count=$commit_count"
