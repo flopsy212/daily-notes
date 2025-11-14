@@ -24,8 +24,12 @@ if [[ "$DOW" -eq 6 || "$DOW" -eq 7 ]]; then
     commit_count=$(( 15 + RANDOM % 11 ))    # 15..25
   fi
 else
-  # 平日：0〜10回ランダム
-  commit_count=$(( 0 + RANDOM % 10 ))       # 0..10
+  # 平日：70%の確率で0〜3回、30%の確率で5~10回
+  roll=$((RANDOM % 100))
+  if (( roll < 70 )); then
+    commit_count=$(( 0 + RANDOM % 4 ))       # 0..3
+  else
+    commit_count=$(( 5 + RANDOM % 6 ))    # 5..10
 fi
 
 echo "JST: $NOW_DATE ($NOW_TIME) / DOW=$DOW → commit_count=$commit_count"
