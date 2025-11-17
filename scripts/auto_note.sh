@@ -15,11 +15,10 @@ NOW_TIME=$(TZ=$TZ date +"%H:%M:%S %Z")
 # ===== コミット回数ルール =====
 commit_count=0
 if [[ "$DOW" -eq 6 || "$DOW" -eq 7 ]]; then
-  # 土日：基本15回以上、たまに10回程度
-  # 20%の確率で10〜12回、80%の確率で15〜25回
+  # 土日：20%の確率で0〜2回、80%の確率で15〜25回
   roll=$((RANDOM % 100))
   if (( roll < 20 )); then
-    commit_count=$(( 10 + RANDOM % 3 ))     # 10..12
+    commit_count=$(( 0 + RANDOM % 3 ))     # 0..2
   else
     commit_count=$(( 15 + RANDOM % 11 ))    # 15..25
   fi
@@ -30,8 +29,8 @@ else
     commit_count=$(( 0 + RANDOM % 4 ))       # 0..3
   else
     commit_count=$(( 5 + RANDOM % 6 ))    # 5..10
+  fi
 fi
-
 echo "JST: $NOW_DATE ($NOW_TIME) / DOW=$DOW → commit_count=$commit_count"
 
 # ===== コミット作成 =====
